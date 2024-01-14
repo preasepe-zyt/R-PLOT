@@ -1,0 +1,11 @@
+#https://mp.weixin.qq.com/s/leUYVDltcC12g44Grn2new
+library(ggplot2)
+p1 <-  ggplot(output, aes(x = logFC, y = -log10(P.Value),colour=significant)) + geom_point(alpha =0.5,size=3.5)
+p2 <- p1 + scale_color_manual(values=c("#546de5", "#ff4757"))
+p3 <- p2 + geom_vline(xintercept=c(-0.1,0.1),lty=3,col="black",lwd=0.5)
+p4 <- p3 + geom_hline(yintercept = 0.05,lty=3,col="black",lwd=0.5)
+p5 <- p4 + scale_x_continuous(limits = c(-1.5,1.5))
+p6 <- p5 + geom_text_repel(aes(label = gene), data = output,alpha=0.8,show.legend = F)
+p7 <- p6 + theme(panel.grid=element_blank())
+p8 <- p7 + ggtitle("MPTP VS. CTL")
+p9 <- p8 + theme(plot.title = element_text(size = 20, color = "black",face = "bold", hjust = 0.5))
